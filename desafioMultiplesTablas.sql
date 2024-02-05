@@ -56,8 +56,8 @@ INNER JOIN usuarios ON usuarios.id=comentarios.usuario_id;
 --9 Muestra el contenido del último comentario de cada usuario.
 SELECT t.id AS idUsuarios, comentarios.contenido FROM
 (SELECT usuarios.id AS id, MAX(comentarios.fecha_creacion) AS fecha  FROM  usuarios
-INNER JOIN comentarios ON usuarios.id=comentarios.usuario_id GROUP BY usuarios.id)
-t INNER JOIN comentarios ON t.fecha=comentarios.fecha_creacion AND t.id=comentarios.usuario_id;
+LEFT JOIN comentarios ON usuarios.id=comentarios.usuario_id GROUP BY usuarios.id)
+t LEFT JOIN comentarios ON t.fecha=comentarios.fecha_creacion AND t.id=comentarios.usuario_id;
 
 --10 Muestra los emails de los usuarios que no han escrito ningún comentario
 SELECT  usuarios.email, COUNT(comentarios.*) FROM  usuarios
